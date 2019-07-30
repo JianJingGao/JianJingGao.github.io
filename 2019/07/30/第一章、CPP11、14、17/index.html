@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="���뻷����   clang++    -std=c++17 1.1 �����õ����������������ַ�������ֵ������ֵ��char������Ҫ�ã���Ӧʹ��const char����auto ��98�쳣˵����unexpected_handler��set_unexpected����Ӧʹ��noexcept noexcept�����߱��������">
-<meta name="keywords" content="��̨����������ѧϰ">
+  <meta name="description" content="编译环境：   clang++    -std=c++17 1.1 被弃用的特性·不再允许字符串字面值常量赋值给char，如果要用，则应使用const char或者auto ·98异常说明、unexpected_handler、set_unexpected，则应使用noexcept noexcept：告诉编译器函数中不会发现异常，有利于编译器对程序做更多优化。 如果运行时，noexcept向外抛出">
+<meta name="keywords" content="后台技术，语言学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++11&#x2F;14&#x2F;17">
-<meta property="og:url" content="http://www.gtthub.cn/2019/07/30/第一章、CPP11-14-17/index.html">
+<meta property="og:title" content="第一章、CPP11、14、17">
+<meta property="og:url" content="http://www.gtthub.cn/2019/07/30/第一章、CPP11、14、17/index.html">
 <meta property="og:site_name" content="见静的个人博客">
-<meta property="og:description" content="���뻷����   clang++    -std=c++17 1.1 �����õ����������������ַ�������ֵ������ֵ��char������Ҫ�ã���Ӧʹ��const char����auto ��98�쳣˵����unexpected_handler��set_unexpected����Ӧʹ��noexcept noexcept�����߱��������">
+<meta property="og:description" content="编译环境：   clang++    -std=c++17 1.1 被弃用的特性·不再允许字符串字面值常量赋值给char，如果要用，则应使用const char或者auto ·98异常说明、unexpected_handler、set_unexpected，则应使用noexcept noexcept：告诉编译器函数中不会发现异常，有利于编译器对程序做更多优化。 如果运行时，noexcept向外抛出">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-30T13:03:17.000Z">
+<meta property="og:updated_time" content="2019-07-30T13:17:35.661Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++11&#x2F;14&#x2F;17">
-<meta name="twitter:description" content="���뻷����   clang++    -std=c++17 1.1 �����õ����������������ַ�������ֵ������ֵ��char������Ҫ�ã���Ӧʹ��const char����auto ��98�쳣˵����unexpected_handler��set_unexpected����Ӧʹ��noexcept noexcept�����߱��������">
+<meta name="twitter:title" content="第一章、CPP11、14、17">
+<meta name="twitter:description" content="编译环境：   clang++    -std=c++17 1.1 被弃用的特性·不再允许字符串字面值常量赋值给char，如果要用，则应使用const char或者auto ·98异常说明、unexpected_handler、set_unexpected，则应使用noexcept noexcept：告诉编译器函数中不会发现异常，有利于编译器对程序做更多优化。 如果运行时，noexcept向外抛出">
 
 
 
@@ -113,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="http://www.gtthub.cn/2019/07/30/第一章、CPP11-14-17/">
+  <link rel="canonical" href="http://www.gtthub.cn/2019/07/30/第一章、CPP11、14、17/">
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>C++11/14/17 | 见静的个人博客</title>
+  <title>第一章、CPP11、14、17 | 见静的个人博客</title>
   
 
 
@@ -367,7 +367,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.gtthub.cn/2019/07/30/第一章、CPP11-14-17/">
+    <link itemprop="mainEntityOfPage" href="http://www.gtthub.cn/2019/07/30/第一章、CPP11、14、17/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JianJing">
@@ -384,7 +384,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 
         
         
-          <h1 class="post-title" itemprop="name headline">C++11/14/17
+          <h1 class="post-title" itemprop="name headline">第一章、CPP11、14、17
 
               
             
@@ -410,7 +410,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
                 
               
 
-              <time title="创建时间：2019-07-30 20:47:34 / 修改时间：21:03:17" itemprop="dateCreated datePublished" datetime="2019-07-30T20:47:34+08:00">2019-07-30</time>
+              <time title="创建时间：2019-07-30 21:16:37 / 修改时间：21:17:35" itemprop="dateCreated datePublished" datetime="2019-07-30T21:16:37+08:00">2019-07-30</time>
             </span>
           
 
@@ -447,8 +447,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/07/30/第一章、CPP11-14-17/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/30/第一章、CPP11-14-17/" itemprop="commentCount"></span>
+                <a href="/2019/07/30/第一章、CPP11、14、17/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/30/第一章、CPP11、14、17/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -487,29 +487,29 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
       
 
       
-        <p>���뻷����   clang++    -std=c++17</p>
-<h5 id="1-1-�����o�����"><a href="#1-1-�����o�����" class="headerlink" title="1.1 �����õ�����"></a>1.1 �����õ�����</h5><p>�����������ַ�������ֵ������ֵ��char<em>������Ҫ�ã���Ӧʹ��const char</em>����auto</p>
-<p>��98�쳣˵����unexpected_handler��set_unexpected����Ӧʹ��noexcept</p>
-<p>noexcept�����߱����������в��ᷢ���쳣�������ڱ������Գ����������Ż���</p>
-<p>��������ʱ��noexcept�����׳����쳣�����������ڲ������쳣�������������������������쳣����������ֱ����ֹ������std::terminate(),�ú����ڲ�������std::abort������ֹ������C++�쳣����������ʱ���������Ǳ���ʱ��Ϊʵ������ʱ���⣬���������贴���������룬Ȼ�������������Ż���</p>
-<p>һ���������쳣�ǳ��õģ�        </p>
-<p>��    һ���������ߺ������ܻ��׳�һ���쳣</p>
-<p>��    һ���������ߺ��������ܻ��׳��κ��쳣</p>
-<p>��һ����������C++�汾�г���throw������ʾ����C++11���Ѿ���noexcept����</p>
+        <p>编译环境：   clang++    -std=c++17</p>
+<h5 id="1-1-被弃用的特性"><a href="#1-1-被弃用的特性" class="headerlink" title="1.1 被弃用的特性"></a>1.1 被弃用的特性</h5><p>·不再允许字符串字面值常量赋值给char<em>，如果要用，则应使用const char</em>或者auto</p>
+<p>·98异常说明、unexpected_handler、set_unexpected，则应使用noexcept</p>
+<p>noexcept：告诉编译器函数中不会发现异常，有利于编译器对程序做更多优化。</p>
+<p>如果运行时，noexcept向外抛出了异常（如果函数内部捕获异常并做出处理，此类情况不算异常），程序会直接中止，调用std::terminate(),该函数内部会调用std::abort（）中止程序。C++异常处理是运行时检测而不是编译时。为实现运行时检测，编译器则需创建额外代码，然而会妨碍程序优化。</p>
+<p>一般有两种异常是常用的：        </p>
+<p>·    一个操作或者函数可能会抛出一个异常</p>
+<p>·    一个操作或者函数不可能会抛出任何异常</p>
+<p>后一种再以往的C++版本中常用throw（）表示，再C++11中已经被noexcept代替</p>
 <p>void swap(Type&amp; x,Type &amp;y) throw(){;}</p>
 <p>Void swap(Type&amp; x,Type &amp;y) noexcept{;}</p>
-<p>��auto_ptr�����ã�Ӧʹ��unique_ptr</p>
-<pre><code>unique_ptr��share_ptr����ͬ������ָ���Ķ������ض��ģ���unique_ptr������ʱ������ָ���Ķ���Ҳ�����ڡ�
+<p>·auto_ptr被弃用，应使用unique_ptr</p>
+<pre><code>unique_ptr与share_ptr所不同，它所指向的对象是特定的，当unique_ptr被销毁时候它所指向的对象也不存在。
 
-��register�ؼ��ֱ����ã����߱�����
+·register关键字被弃用，不具备含义
 
-��bool����++������
+·bool类型++被弃用
 
-��������������������Ϊ�����ɿ������캯���Ϳ�����ֵ�����������Ա�������
+·如果类有析构函数，为其生成拷贝构造函数和拷贝赋值运算符的特性被弃用了
 
-��convert_type�����ã�Ӧʹ��static_cast��reinterpret_cast��const_cast������ת��
+·convert_type被弃用，应使用static_cast、reinterpret_cast、const_cast来类型转换
 
-������C++17��׼��������C��׼��</code></pre><h5 id="1-2-����Ҫ��"><a href="#1-2-����Ҫ��" class="headerlink" title="1.2 ����Ҫ��"></a>1.2 ����Ҫ��</h5><pre><code>Makefile�������Ʊ��������ǿո���ֱ�Ӹ��ƴ������Խ��Ʊ����滻�ɿո�</code></pre>
+·另，C++17标准中弃用了C标准库</code></pre><h5 id="1-2-编译要点"><a href="#1-2-编译要点" class="headerlink" title="1.2 编译要点"></a>1.2 编译要点</h5><pre><code>Makefile缩进是制表符而不是空格，直接复制代码可以将制表符替换成空格</code></pre>
       
     </div>
 
@@ -535,7 +535,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         
         <div class="post-tags">
           
-            <a href="/tags/��̨����������ѧϰ/" rel="tag"># ��̨����������ѧϰ</a>
+            <a href="/tags/后台技术，语言学习/" rel="tag"># 后台技术，语言学习</a>
           
         </div>
       
@@ -548,8 +548,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/28/一、环境安装和配置/" rel="next" title="一、环境安装和配置">
-                <i class="fa fa-chevron-left"></i> 一、环境安装和配置
+              <a href="/2019/07/30/第二章、语言可用性强化/" rel="next" title="第二章、语言可用性强化">
+                <i class="fa fa-chevron-left"></i> 第二章、语言可用性强化
               </a>
             
           </div>
@@ -557,10 +557,6 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/30/第二章、语言可用性强化/" rel="prev" title="第二章、语言可用性强化">
-                第二章、语言可用性强化 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -684,9 +680,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -750,7 +744,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-�����o�����"><span class="nav-number">1.</span> <span class="nav-text">1.1 �����õ�����</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-����Ҫ��"><span class="nav-number">2.</span> <span class="nav-text">1.2 ����Ҫ��</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-被弃用的特性"><span class="nav-number">1.</span> <span class="nav-text">1.1 被弃用的特性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-编译要点"><span class="nav-number">2.</span> <span class="nav-text">1.2 编译要点</span></a></li></ol></div>
             
 
           </div>
@@ -963,9 +957,9 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 
 <script>
   var disqus_config = function() {
-    this.page.url = "http://www.gtthub.cn/2019/07/30/第一章、CPP11-14-17/";
-    this.page.identifier = "2019/07/30/第一章、CPP11-14-17/";
-    this.page.title = 'C++11/14/17';
+    this.page.url = "http://www.gtthub.cn/2019/07/30/第一章、CPP11、14、17/";
+    this.page.identifier = "2019/07/30/第一章、CPP11、14、17/";
+    this.page.title = '第一章、CPP11、14、17';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
