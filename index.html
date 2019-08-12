@@ -366,6 +366,422 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.gtthub.cn/2019/08/12/qt和qml交互（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JianJing">
+      <meta itemprop="description" content="博观而约取,厚积而薄发">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="见静的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/12/qt和qml交互（二）/" class="post-title-link" itemprop="url">qt和qml交互（二）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-12 19:00:03 / 修改时间：19:06:06" itemprop="dateCreated datePublished" datetime="2019-08-12T19:00:03+08:00">2019-08-12</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/12/qt和qml交互（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/12/qt和qml交互（二）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="二、QML相关属性"><a href="#二、QML相关属性" class="headerlink" title="二、QML相关属性"></a>二、QML相关属性</h3><h3 id="1-Animation-Elements"><a href="#1-Animation-Elements" class="headerlink" title="1.Animation Elements"></a>1.Animation Elements</h3><p>​      动画效果有很多种类型元素，在特定情况选择可以达到最好的效果，目前我探索的动画类型有</p>
+<ol>
+<li><p>PropertyAnimation(属性动画)    通过属性值改变播放动画</p>
+</li>
+<li><p>NumberAnimation(数字动画)     使用数字改变播放动画</p>
+</li>
+<li><p>RotationAnimation(旋转动画)    使用旋转改变播放动画</p>
+</li>
+<li><p>SequentialAnimation(顺序动画)    允许动画有序播放</p>
+<p>我们为了实现一定效果时，需要创建一连串动画，在播放一个动画时需要改变一个属性或者运行一个脚本。为此Quick中包含了动作元素：</p>
+<ul>
+<li>PropertyAction(属性动作)    在播放动画时改变属性</li>
+<li>ScriptAction(脚本动作)    在播放动画时运行脚本</li>
+</ul>
+</li>
+</ol>
+<h3 id="动画效果的演示"><a href="#动画效果的演示" class="headerlink" title="动画效果的演示"></a>动画效果的演示</h3><iframe height="500" width="500" src="ModernCPP/GIF.gif">
+
+<p>​                    上图是Behavior对象跟随鼠标移动效果的实现，附源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Rectangle</span><br><span class="line">&#123;</span><br><span class="line">    width: 100</span><br><span class="line">    height: 100</span><br><span class="line"> </span><br><span class="line">    color: &quot;blue&quot;</span><br><span class="line">    id:rectx</span><br><span class="line"></span><br><span class="line">    Behavior on x&#123;		//在x轴运动的轨迹变化，从坐标x处开始</span><br><span class="line"></span><br><span class="line">        PropertyAnimation&#123; duration:  1000 &#125;	//属性动画，设置动画时间</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Behavior on y&#123;		//在y轴运动的轨迹变化</span><br><span class="line"></span><br><span class="line">        PropertyAnimation&#123; duration:  1000 &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MouseArea&#123;</span><br><span class="line">    anchors.fill: parent		//范围继承上级区域</span><br><span class="line">    onClicked: &#123;</span><br><span class="line"></span><br><span class="line">        rectx.x = mouse.x	//点击事件，更新动画起始发生点</span><br><span class="line">        rectx.y = mouse.y </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<iframe height="500" width="500" src="ModernCPP/SequentialGIF.gif">
+
+<p>上图是SequentialAnimation 滑动效果的实现，附源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">Rectangle</span><br><span class="line"> &#123;</span><br><span class="line">     width: 100</span><br><span class="line">     height: 100</span><br><span class="line"> </span><br><span class="line">     color: &quot;blue&quot;</span><br><span class="line">     id:rectx</span><br><span class="line"></span><br><span class="line">     Behavior on x&#123;</span><br><span class="line"></span><br><span class="line">         PropertyAnimation&#123; duration:  1000 &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     Behavior on y&#123;</span><br><span class="line"></span><br><span class="line">         PropertyAnimation&#123; duration:  1000 &#125;</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> MouseArea&#123;</span><br><span class="line">     anchors.fill: parent</span><br><span class="line">     onClicked: &#123;</span><br><span class="line"> </span><br><span class="line">          adim.restart();		//启动动画</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> SequentialAnimation			//顺序动画属性</span><br><span class="line">   &#123;</span><br><span class="line">       id:adim</span><br><span class="line">       NumberAnimation&#123;			//数字动画属性</span><br><span class="line">           target: rectx</span><br><span class="line">           properties: &quot;y&quot;</span><br><span class="line">           to:parc.height/2</span><br><span class="line">           duration: 1200</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       NumberAnimation&#123;</span><br><span class="line">           target: rectx			//触发对象</span><br><span class="line">           properties: &quot;x&quot;		//位置</span><br><span class="line">           to:parc.width			//终点位置</span><br><span class="line"></span><br><span class="line">           duration:  2400			//动画时长</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       onStopped:		//动画执行完成后接收信号的槽</span><br><span class="line">       &#123;		</span><br><span class="line"> </span><br><span class="line">           rectx.x = 0</span><br><span class="line">           rectx.y = 0</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    其他复杂的动画效果，在下一期记录更新</p>
+<h3 id="2-Controls"><a href="#2-Controls" class="headerlink" title="2.Controls"></a>2.Controls</h3><p>​    今天开发中还用到了一些QML的视图控件，在此记录下来备忘待查。</p>
+<ul>
+<li><p>​        ListView</p>
+<p>​    ListView可以动态加载Item，拥有平滑流畅的滚动效果，譬如在需要加入文本数据信息、页面、图像画面等。</p>
+<p>下面列一些较为重要的ListView属性：</p>
+<p>​    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">snapMode: ListView.SnapOneItem			//改变切换模式为单张切换</span><br><span class="line">orientation:ListView.Horizontal				//列表浏览改为水平浏览</span><br><span class="line">highlightRangeMode: ListView.StrictlyEnforceRange	//currentindex跟随切换变化</span><br><span class="line">boundsBehavior:Flickable.StopAtBounds			//取消回弹效果</span><br><span class="line">maximumFlickVelocity:7000  	//设置滑动的最大速度</span><br><span class="line">model： pageModel			//设置数据源</span><br></pre></td></tr></table></figure>
+
+<pre><code>ListView的数据源类型分别可以是ListModel、ObjectModel以及C++中的QStringList、QList等。ListModel是一个简单的ListElement容器，每个容器都包含数据角色，内容可以动态定义也可以在QML显示定义；QObjectModel被用于视图时，视图不需要使用Delegate，因为模型中已经包含了；C++中的类型导入需要进行对象注册；</code></pre></li>
+</ul>
+<h3 id="3-Git"><a href="#3-Git" class="headerlink" title="3.Git"></a>3.Git</h3><p>​    记录一下gitlab常用命令</p>
+<ul>
+<li>git init        //建立一个git仓库文件</li>
+<li>git  clone   url        //克隆整个仓库            </li>
+<li>git config –list          //显示当前git配置</li>
+<li>git  add .        //添加当前目录所有文件到暂存区</li>
+<li>git rm [file]        //删除工作区文件，并且将这次删除放入暂存区</li>
+<li>git commit -m [message]        //提交工作区到仓库区</li>
+<li>git commit  -a    //提交上次commit之后的变化，直接到仓库区</li>
+<li>git branch    //列出本地所有分支</li>
+<li>git push origin                //将本地分支推送到origin主机</li>
+<li>git fetch  [remote]            //下载所有远程库变动</li>
+<li></li>
+</ul>
+<h3 id="4-其他问题"><a href="#4-其他问题" class="headerlink" title="4.其他问题"></a>4.其他问题</h3><p>​    今天遇到了Could not connect to the in-process QML debugger这个问题，怀疑端口号被占用，重启电脑无效，之后使用VS运行发现新加入的模块DLL没有放进去所以导致这个错误            //——2019年8月12日 15点51分</p>
+<p>​       </p>
+</iframe></iframe>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.gtthub.cn/2019/08/12/qt和qml交互（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JianJing">
+      <meta itemprop="description" content="博观而约取,厚积而薄发">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="见静的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/12/qt和qml交互（一）/" class="post-title-link" itemprop="url">qt和qml交互（一）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-12 18:56:57 / 修改时间：19:00:54" itemprop="dateCreated datePublished" datetime="2019-08-12T18:56:57+08:00">2019-08-12</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/12/qt和qml交互（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/12/qt和qml交互（一）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、QT与QML的数据交换"><a href="#一、QT与QML的数据交换" class="headerlink" title="一、QT与QML的数据交换"></a>一、QT与QML的数据交换</h2><p>​    项目中有部分需要程序处理完数据，丢给QT Quick中的图标上去作显示。处理完的数据由一层结构体包裹之后通过信号槽发给QML那边JavaScript显示处理</p>
+<p>​    </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">InfoType</span>	//信息类型</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	Type1,			</span><br><span class="line">	Type2,</span><br><span class="line">	Type3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MixStruct</span>	//自定义结构体</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> road1; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Q_DECLARE_METATYPE(MixedDataStruct)         </span><br><span class="line"><span class="comment">//使用自定义类型可用于QVariant中需要再类声明后面加上:Q_DECLARE_METATYPE</span></span><br><span class="line"><span class="comment">//之后就可以使用AVariant包裹这层结构体进行传输了</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="AVariant类型介绍"><a href="#AVariant类型介绍" class="headerlink" title="AVariant类型介绍"></a>AVariant类型介绍</h3><p>​    该类型相当于Java的Object，它把绝大多数Qt提供的类型都封装了起来，起到一个数据类型“擦除”作用。比如表中类型可以是string也可以是int，也可以是其他类型，那么这么多类型的返回应该怎么处理？于是，QT提供了这个QVariant类型，可以把这么很多类型都存放进去，需要使用的时候使用一系列to函数取出。</p>
+<p>​    可以将int包装成一个QVariant，使用的时候用QVariant::toInt()重新取出来。放出和取出必须是相对应的，放入一个int取出也是int，不能使用toString（），QT不会自动转换。</p>
+<p>​    如果是自定义类型的转换，那需要</p>
+<p>​            </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QVariant obj;</span><br><span class="line">MyCustomType type =  obj.value&lt;MyCustomType&gt;(); <span class="comment">//QVariant To CustomType</span></span><br></pre></td></tr></table></figure>
+
+<p>QML端接收时使用var接收</p>
+<h2 id="二、QT操作SQLite数据库"><a href="#二、QT操作SQLite数据库" class="headerlink" title="二、QT操作SQLite数据库"></a>二、QT操作SQLite数据库</h2><p>​    tips：当操作大量数据到sqlite数据库时，可以使用事务提升效率</p>
+<p>​    1.修改.pro文件，加入SQL模块：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QT += sql</span><br></pre></td></tr></table></figure>
+
+<p>​    2.关键代码实现:    </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlDatabase&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlError&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSqlQuery&gt;</span></span></span><br><span class="line"></span><br><span class="line">QsqlDatabase database;</span><br><span class="line">QSqlQuery oper;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">InitialSql</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//选择导入数据库类型</span></span><br><span class="line">	database = QSqlDatabase::addDatabase(<span class="string">"QSQLITE"</span>);</span><br><span class="line">	<span class="comment">//设置数据库文件名称</span></span><br><span class="line">	database.setDatabaseName(<span class="string">"Mydatabase.db"</span>);</span><br><span class="line">	<span class="comment">//打开数据库</span></span><br><span class="line">	<span class="keyword">if</span>(!database.open())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//fail;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//success;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建数据表</span></span><br><span class="line"><span class="keyword">bool</span> CreateTable()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(!oper.exec(<span class="string">"create table tbl(id int primary key,name text,age int)"</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//false</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//true</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//插入数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> insertCmd()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> oper.exec(<span class="string">"INSERT INTO student VALUES(1, \"Wang\", 23)"</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查询数据</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">queryData</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!sql.exec(<span class="string">"select *from tbl"</span>))</span><br><span class="line">	&#123;</span><br><span class="line">			oper.lastError();	<span class="comment">//输出错误原因</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(oper.next())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">auto</span> value1 =oper.value(<span class="number">0</span>).toInt();</span><br><span class="line">			<span class="keyword">auto</span> value2 =oper.value(<span class="number">1</span>).toString();</span><br><span class="line">			<span class="keyword">auto</span> value3 =oper.value(<span class="number">2</span>).toInt();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除数据</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delectData</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> oper.exec(<span class="string">"delete from tbl where id = 2"</span>)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//关闭数据库</span></span><br><span class="line">database.close();</span><br></pre></td></tr></table></figure>
+
+<p>之后通过QML端JS代码进行调用，按照需求查询记录</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.gtthub.cn/2019/07/30/第一章、CPP11、14、17/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1724,7 +2140,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1749,7 +2165,9 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1772,7 +2190,9 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
