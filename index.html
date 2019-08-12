@@ -411,7 +411,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
                 
               
 
-              <time title="创建时间：2019-08-12 19:00:03 / 修改时间：19:16:13" itemprop="dateCreated datePublished" datetime="2019-08-12T19:00:03+08:00">2019-08-12</time>
+              <time title="创建时间：2019-08-12 19:00:03 / 修改时间：19:21:52" itemprop="dateCreated datePublished" datetime="2019-08-12T19:00:03+08:00">2019-08-12</time>
             </span>
           
 
@@ -501,7 +501,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 <h3 id="动画效果的演示"><a href="#动画效果的演示" class="headerlink" title="动画效果的演示"></a>动画效果的演示</h3><iframe height="300" width="300" src="ModernCPP/GIF.gif">
 
 
-<p>​                    上图是Behavior对象跟随鼠标移动效果的实现，附源码</p>
+<p>上图是Behavior对象跟随鼠标移动效果的实现，附源码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Rectangle</span><br><span class="line">&#123;</span><br><span class="line">    width: 100</span><br><span class="line">    height: 100</span><br><span class="line"> </span><br><span class="line">    color: &quot;blue&quot;</span><br><span class="line">    id:rectx</span><br><span class="line"></span><br><span class="line">    Behavior on x&#123;		//在x轴运动的轨迹变化，从坐标x处开始</span><br><span class="line"></span><br><span class="line">        PropertyAnimation&#123; duration:  1000 &#125;	//属性动画，设置动画时间</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Behavior on y&#123;		//在y轴运动的轨迹变化</span><br><span class="line"></span><br><span class="line">        PropertyAnimation&#123; duration:  1000 &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MouseArea&#123;</span><br><span class="line">    anchors.fill: parent		//范围继承上级区域</span><br><span class="line">    onClicked: &#123;</span><br><span class="line"></span><br><span class="line">        rectx.x = mouse.x	//点击事件，更新动画起始发生点</span><br><span class="line">        rectx.y = mouse.y </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
